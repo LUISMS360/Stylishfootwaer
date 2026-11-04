@@ -28,7 +28,7 @@ new #[Layout('layouts.app-dashboard')] class extends Component
     {
         return Order::query()
             ->with('user')
-            ->withCount('orderItem')
+            ->withCount('items')
             ->when(trim($this->search) !== '', function ($query) {
                 $search = trim($this->search);
 
