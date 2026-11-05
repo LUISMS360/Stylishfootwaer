@@ -32,7 +32,7 @@ new #[Layout('layouts.app')] class extends Component
     #[Validate('required|numeric|min:1|max:1000')]
     public $price = '';
 
-    #[Validate('required|image|max:2048')]
+    #[Validate('required|image|mimes:png,jpg,jpeg|max:2048')]
     public $image = null;
 
     #[Validate('boolean')]
