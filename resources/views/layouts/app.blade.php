@@ -73,18 +73,19 @@
                         @endif
                         @endauth
 
-                        @if(auth()->user()->role==='admin')
-                        {{-- Productos --}}
+                        @auth
+                        @if (auth()->user()->role === 'admin')
+                        {{-- Productos Administrador --}}
                         <li class="nav-item">
                             <a href="{{ route('admin.products-index') }}" wire:navigate
-                                @class([ 'nav-link' , 'active'=> request()->is('guest/products*') ])
-                                @if(request()->is('guest/products*')) aria-current="page" @endif>
+                                @class([ 'nav-link' , 'active'=> request()->is('admin/productos*') ])
+                                @if(request()->is('admin/productos*')) aria-current="page" @endif>
                                 <i class="ti ti-package me-2"></i>
                                 Productos
                             </a>
                         </li>
                         @else
-                        {{-- Productos --}}
+                        {{-- Productos Cliente --}}
                         <li class="nav-item">
                             <a href="{{ route('products.index') }}" wire:navigate
                                 @class([ 'nav-link' , 'active'=> request()->is('guest/products*') ])
@@ -93,8 +94,19 @@
                                 Productos
                             </a>
                         </li>
-                        @endif                        
-
+                        @endif
+                        @else
+                        {{-- Productos Invitado --}}
+                        <li class="nav-item">
+                            <a href="{{ route('products.index') }}" wire:navigate
+                                @class([ 'nav-link' , 'active'=> request()->is('guest/products*') ])
+                                @if(request()->is('guest/products*')) aria-current="page" @endif>
+                                <i class="ti ti-package me-2"></i>
+                                Productos
+                            </a>
+                        </li>
+                        @endauth
+                        
                         @auth
                         @if (auth()->user()->role === 'admin')
                         {{-- Órdenes Administrador --}}
