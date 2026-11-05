@@ -73,6 +73,17 @@
                         @endif
                         @endauth
 
+                        @if(auth()->user()->role==='admin')
+                        {{-- Productos --}}
+                        <li class="nav-item">
+                            <a href="{{ route('admin.products-index') }}" wire:navigate
+                                @class([ 'nav-link' , 'active'=> request()->is('guest/products*') ])
+                                @if(request()->is('guest/products*')) aria-current="page" @endif>
+                                <i class="ti ti-package me-2"></i>
+                                Productos
+                            </a>
+                        </li>
+                        @else
                         {{-- Productos --}}
                         <li class="nav-item">
                             <a href="{{ route('products.index') }}" wire:navigate
@@ -82,6 +93,7 @@
                                 Productos
                             </a>
                         </li>
+                        @endif                        
 
                         @auth
                         @if (auth()->user()->role === 'admin')
