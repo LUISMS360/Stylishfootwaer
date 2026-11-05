@@ -9,7 +9,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithoutUrlPagination;
 
-new #[Layout('layouts.app-dashboard')] class extends Component
+new #[Layout('layouts.app')] class extends Component
 {
     use WithPagination, WithoutUrlPagination;
 

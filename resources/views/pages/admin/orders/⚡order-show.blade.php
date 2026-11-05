@@ -3,7 +3,7 @@
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
-new #[Layout('layouts.app-dashboard')] class extends Component
+new #[Layout('layouts.app')] class extends Component
 {
     //
 };

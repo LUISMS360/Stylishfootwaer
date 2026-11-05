@@ -10,7 +10,7 @@ use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-new #[Layout('layouts.app-dashboard')] class extends Component
+new #[Layout('layouts.app')] class extends Component
 {
     use WithFileUploads;
 

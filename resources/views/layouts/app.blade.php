@@ -49,7 +49,32 @@
 
                     <ul class="navbar-nav me-auto">
 
+                        @isset(auth()->user)
+                        @if (auth()->user->role='admin')
 
+                        {{-- Marcas --}}
+                        <li class="nav-item">
+                            <a href="{{ route('admin.brand.index') }}" wire:navigate
+                                @class([ 'nav-link' , 'active'=> request()->is('admin/marcas*'),
+                                ])
+                                @if(request()->is('admin/marcas*')) aria-current="page" @endif>
+                                <i class="ti ti-tags me-2"></i>
+                                Marcas
+                            </a>
+                        </li>
+
+                        {{-- Categorías --}}
+                        <li class="nav-item">
+                            <a href="{{ route('admin.categories-index') }}" wire:navigate
+                                @class([ 'nav-link' , 'active'=> request()->is('admin/categorias*'),
+                                ])
+                                @if(request()->is('admin/categorias*')) aria-current="page" @endif>
+                                <i class="ti ti-category me-2"></i>
+                                Categorías
+                            </a>
+                        </li>
+                        @endif
+                        @endisset
 
                         {{-- Productos --}}
                         <li class="nav-item">
@@ -62,22 +87,32 @@
                             </a>
                         </li>
 
-                        @isset (auth()->user()->role)
-                        {{-- Órdenes --}}
-                        <li class="nav-item">
-                            <a href="{{ route('orders.index') }}" wire:navigate
-                                @class([ 'nav-link' , 'active'=> request()->is('customer/ordenes*'),
-                                ])
-                                @if(request()->is('customer/ordenes*')) aria-current="page" @endif>
-                                <i class="ti ti-shopping-cart me-2"></i>
-                                Mis Órdenes
-                            </a>
-                        </li>
-                        @endif
-
-
+                        @isset(auth()->user)
+                            @if (auth()->user->role === 'admin')
+                            {{-- Órdenes --}}
+                            <li class="nav-item">
+                                <a href="{{ route('admin.orders.index') }}" wire:navigate
+                                    @class([ 'nav-link' , 'active'=> request()->is('customer/ordenes*'),
+                                    ])
+                                    @if(request()->is('customer/ordenes*')) aria-current="page" @endif>
+                                    <i class="ti ti-shopping-cart me-2"></i>
+                                    Órdenes
+                                </a>
+                            </li>
+                            @elseif(auth()->user->role==='customer')
+                            {{-- Órdenes --}}
+                            <li class="nav-item">
+                                <a href="{{ route('orders.index') }}" wire:navigate
+                                    @class([ 'nav-link' , 'active'=> request()->is('customer/ordenes*'),
+                                    ])
+                                    @if(request()->is('customer/ordenes*')) aria-current="page" @endif>
+                                    <i class="ti ti-shopping-cart me-2"></i>
+                                    Mis Órdenes
+                                </a>
+                            </li>
+                            @endif
+                        @endisset
                     </ul>
-
 
                     {{-- Acciones del cliente --}}
                     <div class="navbar-nav ms-auto align-items-md-center">
